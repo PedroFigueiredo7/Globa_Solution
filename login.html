@@ -30,3 +30,15 @@
 
             // Obtém as informações do usuário armazenadas no localStorage
             const usuarioSalvo = JSON.parse(localStorage.getItem('usuario'));
+            // Verifica se o usuário existe no localStorage e se as credenciais correspondem
+            if (usuarioSalvo && cpf === usuarioSalvo.cpf && senha === usuarioSalvo.senha) {
+                window.location.href = 'menu.html'; // Redireciona para o menu se o login for válido
+                return false; // Impede o envio do formulário após o redirecionamento
+            } else {
+                document.getElementById('mensagemErro').style.display = 'block';
+                return false; // Impede o envio do formulário se o CPF ou senha estiverem incorretos
+    }
+}
+</script>
+</body>
+</html>
