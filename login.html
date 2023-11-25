@@ -21,3 +21,12 @@
             <p id="mensagemErro" style="color: red; display: none;">CPF ou senha incorretos. Por favor, verifique seus dados.</p>
         </form>
     </div>
+
+    <script>
+        function validarLogin() {
+            // Obtém os valores do formulário
+            const cpf = document.getElementById('cpf').value;
+            const senha = document.getElementById('senha').value;
+
+            // Obtém as informações do usuário armazenadas no localStorage
+            const usuarioSalvo = JSON.parse(localStorage.getItem('usuario'));
