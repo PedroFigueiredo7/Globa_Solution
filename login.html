@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+    <head>
+        <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tela de Login - Acesso de Saúde Remota</title>
+    <link rel="stylesheet" href="validação.js">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <h1>Bem-vindo à Plataforma de Acesso de Saúde Remota</h1>
+        <h2>Tela de Login</h2>
+        <form id="loginForm" onsubmit="return validarLogin()" action="menu.html">
+            <label for="cpf">CPF:</label>
+            <input type="text" id="cpf" name="cpf" placeholder="Seu CPF..." required>
+            <label for="senha">Senha:</label>
+            <input type="password" id="senha" name="senha" placeholder="Sua senha..." required>
+            <button type="submit">Entrar</button>
+            <a href="cadastro.html">Cadastrar</a>
+            <p id="mensagemErro" style="color: red; display: none;">CPF ou senha incorretos. Por favor, verifique seus dados.</p>
+        </form>
+    </div>
+
+    <script>
+        function validarLogin() {
+            // Obtém os valores do formulário
+            const cpf = document.getElementById('cpf').value;
+            const senha = document.getElementById('senha').value;
+
+            // Obtém as informações do usuário armazenadas no localStorage
+            const usuarioSalvo = JSON.parse(localStorage.getItem('usuario'));
+            // Verifica se o usuário existe no localStorage e se as credenciais correspondem
+            if (usuarioSalvo && cpf === usuarioSalvo.cpf && senha === usuarioSalvo.senha) {
+                window.location.href = 'menu.html'; // Redireciona para o menu se o login for válido
+                return false; // Impede o envio do formulário após o redirecionamento
+            } else {
+                document.getElementById('mensagemErro').style.display = 'block';
+                return false; // Impede o envio do formulário se o CPF ou senha estiverem incorretos
+    }
+}
+</script>
+</body>
+</html>
