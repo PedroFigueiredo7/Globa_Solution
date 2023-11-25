@@ -1,0 +1,166 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Agendamento - Acesso de Saúde Remota</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <main>
+        <section id="home-care">
+            <h2>Home Care</h2>
+            <button onclick="openSchedule('homeCare')">Agendar Home Care</button>
+            <div id="schedule-homeCare" style="display: none;">
+                <label for="date-homeCare">Escolha a data:</label>
+                <input type="date" id="date-homeCare" name="date-homeCare">
+
+                <label for="time-homeCare">Escolha o horário:</label>
+                <select id="time-homeCare" name="time-homeCare">
+                    <!-- Opções de horários -->
+                    <!-- Horários de atendimento de 8:00 às 16:00, de meia em meia hora -->
+                    <option value="08:00">08:00</option>
+                    <option value="08:30">08:30</option>
+                    <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
+                    <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
+                    <option value="11:00">11:00</option>
+                    <option value="11:30">11:30</option>
+                    <option value="12:00">12:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="13:30">13:30</option>
+                    <option value="14:00">14:00</option>
+                    <option value="14:30">14:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="15:30">15:30</option>
+                    <option value="16:00">16:00</option>
+                </select>
+            </div>
+
+            <label for="observations-homeCare">Observações:</label>
+            <textarea id="observations-homeCare" name="observations-homeCare" rows="4" cols="50" placeholder="Ponto de referência ou endereço"></textarea>
+            <button onclick="saveAppointment('homeCare')">Salvar Agendamento</button>
+            <p id="savedAppointment-homeCare" style="display: none;"></p>
+        </section>
+
+        <section id="atendimento-online">
+            <h2>Atendimento Online</h2>
+            <button onclick="openSchedule('atendimentoOnline')">Agendar Atendimento Online</button>
+            <div id="schedule-atendimentoOnline" style="display: none;">
+                <label for="date-atendimentoOnline">Escolha a data:</label>
+                <input type="date" id="date-atendimentoOnline" name="date-atendimentoOnline">
+
+                <label for="time-atendimentoOnline">Escolha o horário:</label>
+                <select id="time-atendimentoOnline" name="time-atendimentoOnline">
+                    <!-- Opções de horários -->
+                    <!-- Horários de atendimento de 8:00 às 16:00, de meia em meia hora -->
+                    <option value="08:00">08:00</option>
+                    <option value="08:30">08:30</option>
+                    <option value="09:00">09:00</option>
+                    <option value="09:30">09:30</option>
+                    <option value="10:00">10:00</option>
+                    <option value="10:30">10:30</option>
+                    <option value="11:00">11:00</option>
+                    <option value="11:30">11:30</option>
+                    <option value="12:00">12:00</option>
+                    <option value="12:30">12:30</option>
+                    <option value="13:00">13:00</option>
+                    <option value="13:30">13:30</option>
+                    <option value="14:00">14:00</option>
+                    <option value="14:30">14:30</option>
+                    <option value="15:00">15:00</option>
+                    <option value="15:30">15:30</option>
+                    <option value="16:00">16:00</option>
+                </select>
+            </div>
+
+            <label for="symptoms">Descreva seus sintomas:</label>
+            <textarea id="symptoms" name="symptoms" rows="4" cols="50" placeholder="Descreva seus sintomas aqui"></textarea>
+            <button onclick="saveAppointment('atendimentoOnline')">Salvar Agendamento</button>
+            <p id="savedAppointment-atendimentoOnline" style="display: none;"></p>
+        </section>
+    </main>
+
+    <script>
+        function openSchedule(section) {
+            const schedule = document.getElementById(`schedule-${section}`);
+            schedule.style.display = schedule.style.display === 'none' ? 'block' : 'none';
+        }
+
+        function saveAppointment(section) {
+            const date = document.getElementById(`date-${section}`).value;
+            const time = document.getElementById(`time-${section}`).value;
+            const observations = document.getElementById(`observations-${section}`).value;
+            const symptoms = document.getElementById('symptoms').value;
+
+            const appointmentInfo = `Agendamento em ${date} às ${time}. Observações: ${observations}. Sintomas: ${symptoms}`;
+            
+            const savedAppointment = document.getElementById(`savedAppointment-${section}`);
+            savedAppointment.innerText = appointmentInfo;
+            savedAppointment.style.display = 'block';
+        }
+    </script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #333; /* Fundo escuro */
+            color: #fff; /* Texto branco */
+            margin: 0;
+            padding: 0;
+        }
+        
+        main {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        section {
+            margin-bottom: 20px;
+            text-align: center;
+        }
+
+        input[type="date"],
+        input[type="time"],
+        textarea {
+            width: 80%;
+            margin-bottom: 10px;
+            padding: 5px;
+            border-radius: 5px;
+            border: 1px solid #fff;
+            background-color: #444;
+            color: #fff;
+        }
+
+        button {
+            width: 50%;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: blue; /* Botões azuis */
+            color: #fff;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #0056b3; /* Alteração de cor ao passar o mouse */
+        }
+
+        p {
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .observation-section,
+        .symptoms-section {
+            display: none;
+            text-align: center;
+        }
+
+        .show-section {
+            display: block;
+        }
+    </style>
+</body>
+</html>
